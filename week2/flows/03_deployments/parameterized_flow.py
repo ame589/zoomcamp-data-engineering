@@ -13,6 +13,7 @@ def fetch(dataset_url: str) -> pd.DataFrame:
     df = pd.read_csv(dataset_url)
     return df
 
+
 @task(log_prints=True)
 def clean(df: pd.DataFrame) -> pd.DataFrame:
     """fix dtype issues"""
@@ -43,6 +44,7 @@ def write_gcs(path: Path) -> None:
     gcp_block = GcsBucket.load("gcs-bucket")
     gcp_block.upload_from_path(from_path=path, to_path=path)
     return
+
 
 @flow()
 def etl_web_to_gcs(year: int, month: int, color: str) -> None:

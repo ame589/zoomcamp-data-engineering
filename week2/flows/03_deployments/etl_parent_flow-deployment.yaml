@@ -1,15 +1,15 @@
 ###
 ### A complete description of a Prefect Deployment for flow 'etl-parent-flow'
 ###
-name: Parametrized ETL
+name: Parameterized ETL
 description: null
-version: 6abdbbc82586c909df26ff27ffaeabc1
+version: 9b977e0bcffbf8e373ffbc67159af508
 # The work queue that will handle this deployment's runs
 work_queue_name: default
 work_pool_name: null
 work_pool_queue_name: null
 tags: []
-parameters: {"color": "yellow", "month": [1, 2, 3], "year": 2021}
+parameters: { "color": "yellow", "months" :[1, 2, 3], "year": 2021}
 schedule: null
 infra_overrides: {}
 infrastructure:
@@ -29,7 +29,7 @@ infrastructure:
 flow_name: etl-parent-flow
 manifest_path: null
 storage: null
-path: /Users/ETORTOABG/Work/data-engineering-zoomcamp/week_2_workflow_orchestration/03_deployments
+path: /Users/ETORTOABG/Work/data-engineering-zoomcamp/zoomcamp-data-engineering/week2/flows/03_deployments
 entrypoint: parameterized_flow.py:etl_parent_flow
 parameter_openapi_schema:
   title: Parameters
@@ -56,4 +56,4 @@ parameter_openapi_schema:
       type: string
   required: null
   definitions: null
-timestamp: '2023-01-31T16:41:14.871295+00:00'
+timestamp: '2023-02-01T14:02:40.373679+00:00'
