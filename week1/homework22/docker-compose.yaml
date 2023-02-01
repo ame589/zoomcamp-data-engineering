@@ -1,0 +1,14 @@
+services:
+  pg-database:
+    image: postgres:13
+    environment:
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=root
+      - POSTGRES_DB=homework
+    volumes:
+      - "dtc_postgres_volume_local:/var/lib/postgresql/data:rw"
+    ports:
+      - "5432:5432"
+volumes:
+  dtc_postgres_volume_local:
+    external: true
