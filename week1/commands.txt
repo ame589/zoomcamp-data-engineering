@@ -4,6 +4,8 @@ colima start --mount /Users/ETORTOABG/Work/data-engineering-zoomcamp/week_1_basi
 # NEW APPROACH
 colima start
 
+colima start --dns 8.8.8.8 --dns 1.1.1.1 --network-address --arch aarch64 --vm-type=vz
+
 # CREATE VOLUME
 docker volume create --name dtc_postgres_volume_local -d local
 
@@ -38,3 +40,5 @@ python3 ingest_data.py --user=root --password=root --host=127.0.0.1 --port=5432 
 docker build -t taxi_ingest .
 
 docker run --network=pg_network taxi_ingest --user=root --password=root --host=pg-database --port=5432 --db=ny_taxi --table_name=yellow_taxi_trips --url=${URL}
+
+prefect orion start --host 192.168.178.90

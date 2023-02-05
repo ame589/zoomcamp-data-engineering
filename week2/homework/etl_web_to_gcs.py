@@ -1,10 +1,8 @@
 from pathlib import Path
 import pandas as pd
 import os
-from datetime import timedelta
 from prefect import flow, task
 from prefect_gcp.cloud_storage import GcsBucket
-from prefect.tasks import task_input_hash
 
 
 @task(retries=3)
@@ -13,12 +11,9 @@ def fetch(dataset_url: str) -> pd.DataFrame:
     df = pd.read_csv(dataset_url)
     return df
 
-
 @task(log_prints=True)
 def clean(df: pd.DataFrame) -> pd.DataFrame:
     """fix dtype issues"""
-    df['tpep_pickup_datetime'] = pd.to_datetime(df['tpep_pickup_datetime'])
-    df['tpep_dropoff_datetime'] = pd.to_datetime(df['tpep_dropoff_datetime'])
     print(df.head(2))
     print(f"columns: {df.dtypes}")
     print(f"rows: {len(df)}")
@@ -45,10 +40,12 @@ def write_gcs(path: Path) -> None:
     gcp_block.upload_from_path(from_path=path, to_path=path)
     return
 
-
 @flow()
-def etl_web_to_gcs(year: int, month: int, color: str) -> None:
+def etl_web_to_gcs() -> None:
     """The main ETL function"""
+    color = 'green'
+    year = 2020
+    month = 1
     dataset_file = f"{color}_tripdata_{year}-{month:02}"
     dataset_url = f"https://github.com/DataTalksClub/nyc-tlc-data/releases/download/{color}/{dataset_file}.csv.gz"
 
@@ -58,14 +55,5 @@ def etl_web_to_gcs(year: int, month: int, color: str) -> None:
     write_gcs(path)
 
 
-@flow()
-def etl_parent_flow(months: list[int] = [1, 2], year: int = 2021, color: str = "yellow"):
-    for month in months:
-        etl_web_to_gcs(year, month, color)
-
-
 if __name__ == '__main__':
-    color = 'yellow'
-    month = [1, 2, 3]
-    year = 2021
-    etl_parent_flow(month, year, color)
+    etl_web_to_gcs()
