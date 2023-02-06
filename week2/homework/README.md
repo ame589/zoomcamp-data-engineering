@@ -12,7 +12,7 @@ Usage
 
     Clone this repository to your local machine:
 
-git clone [https://github.com/ame589/homework_week_1.git](https://github.com/ame589/homework_week_1.git)
+git clone [https://github.com/ame589/zoomcamp-data-engineering.git](https://github.com/ame589/zoomcamp-data-engineering.git)
 
     Navigate to the repository directory:
 
