@@ -28,3 +28,6 @@ Exercises solutions:
 2. prefect deployment apply etl_web_to_gcs-deployment.yaml
 
 ## Exercise n.3
+
+1. prefect deployment build etl_gcs_to_bq.py:etl_parent_flow --name etl_gcs_to_bq --params='{"color": "yellow", "months" : "[2, 3]", "year": 2019}'
+2. prefect deployment apply etl_parent_flow-deployment.yaml 
