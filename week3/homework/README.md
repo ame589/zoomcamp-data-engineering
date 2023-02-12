@@ -1,15 +1,15 @@
 ## Query n.1
 
 ``` sql
-CREATE OR REPLACE EXTERNAL TABLE `de-nc-gr-pr-datateam.at_trips_data_all.homework3_external`
+CREATE OR REPLACE EXTERNAL TABLE `at_dataset.at_trips_data_all.homework3_external`
 OPTIONS (
 format = 'CSV',
-uris = ['gs://at_data_lake_gcp_de-nc-gr-pr-datateam/data/fhv/fhv_tripdata_2019-*.csv.gz']
+uris = ['gs://at_data_lake_gcp/data/fhv/fhv_tripdata_2019-*.csv.gz']
 );
 
 
-CREATE OR REPLACE TABLE `de-nc-gr-pr-datateam.at_trips_data_all.homework3_internal` AS
-SELECT * FROM `de-nc-gr-pr-datateam.at_trips_data_all.homework3_external`;
+CREATE OR REPLACE TABLE `at_dataset.at_trips_data_all.homework3_internal` AS
+SELECT * FROM `at_dataset.at_trips_data_all.homework3_external`;
 
 
 SELECT count(*)
